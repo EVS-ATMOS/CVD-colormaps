@@ -4,42 +4,9 @@
 
 import matplotlib as mpl
 import matplotlib.colors as colors
+from colormaps import datad
 
 cmap_d = dict()
-
-
-def colormap_generator(datad):
-    """
-    Parameters
-    ----------
-    datad : dict
-        A dictionary containing dictionaries of colormaps.
-
-    """
-    LUTSIZE = mpl.rcParams['image.lut']
- 
-    # need this list because datad is changed in loop
-    _cmapnames = list(datad.keys())
-
-    # Generate the reversed specifications ...
-
-    for cmapname in _cmapnames:
-        spec = datad[cmapname]
-        spec_reversed = _reverse_cmap_spec(spec)
-        datad[cmapname + '_r'] = spec_reversed
-
-    # Precache the cmaps with ``lutsize = LUTSIZE`` ...
- 
-    # Use datad.keys() to also add the reversed ones added in the section above:
-    for cmapname in datad.keys():
-        cmap_d[cmapname] = _generate_cmap(cmapname, datad, LUTSIZE)
-
-    locals().update(cmap_d)
-
-    # register the colormaps so that can be accessed with the names pyart_XXX
-    for name, cmap in cmap_d.items():
-        mpl.cm.register_cmap(name=name, cmap=cmap)
-
 
 # reverse all the colormaps.
 # reversed colormaps have '_r' appended to the name.
@@ -83,7 +50,7 @@ def _reverse_cmap_spec(spec):
         return revspec
 
 
-def _generate_cmap(name, datad, lutsize):
+def _generate_cmap(name, lutsize):
     """Generates the requested cmap from it's name *name*.  The lut size is
     *lutsize*."""
 
@@ -94,3 +61,28 @@ def _generate_cmap(name, datad, lutsize):
         return colors.LinearSegmentedColormap(name, spec, lutsize)
     else:
         return colors.LinearSegmentedColormap.from_list(name, spec, lutsize)
+
+LUTSIZE = mpl.rcParams['image.lut']
+
+# need this list because datad is changed in loop
+_cmapnames = list(datad.keys())
+
+# Generate the reversed specifications ...
+
+for cmapname in _cmapnames:
+    spec = datad[cmapname]
+    spec_reversed = _reverse_cmap_spec(spec)
+    datad[cmapname + '_r'] = spec_reversed
+
+# Precache the cmaps with ``lutsize = LUTSIZE`` ...
+
+# Use datad.keys() to also add the reversed ones added in the section above:
+for cmapname in datad.keys():
+    cmap_d[cmapname] = _generate_cmap(cmapname, LUTSIZE)
+
+locals().update(cmap_d)
+
+# register the colormaps so that can be accessed with the names pyart_XXX
+for name, cmap in cmap_d.items():
+    full_name = 'pyart_' + name
+    mpl.cm.register_cmap(name=full_name, cmap=cmap)
