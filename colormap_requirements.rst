@@ -39,7 +39,7 @@ Differential reflectivity, the difference between vertical and horizontal return
 range from -2dB to 6dB for meteorological scatterers. Negative values mean either the radar is miscalibrated or the scattering medium
 exhibits prolate anisotropy in the backscatter cross section. The only hydrometeors where this tends to happen is vertically
 aligned ice but it can also happen with larger birds or clutter. High values of differential reflectivity are scientifically
- interesting so colors about around 3dB should be striking and there should be a clear break around 0dB. It is useful for
+interesting so colors about around 3dB should be striking and there should be a clear break around 0dB. It is useful for
 scientists, especially radar engineers, to quickly identify areas of 0dB as this is useful in determining the accuracy of
 vertical to horizontal calibration when viewed next to reflectivity images (ie areas of low reflectivity should be near
 0dB).
@@ -47,7 +47,7 @@ vertical to horizontal calibration when viewed next to reflectivity images (ie a
 Correlation coefficient
 =======================
 The Correlation coefficient (cc) is a measure of how uniform the anisotropy is in a scattering volume. In areas of known high
- uniformity (eg stratiform rainfall) it can also provide an indication as to the cross polar coupling (and hence "quality"
+uniformity (eg stratiform rainfall) it can also provide an indication as to the cross polar coupling (and hence "quality"
 of the radar system). CC can range from 0 to 1 and only a small part of the range, around 0.98 to 1, indicates fairly uniform
 anisotropy. Therefore a colormap for CC needs reserve much of its contrast for the range from 0.98 to 1 while still, roughly,
 communicating broad structure in lower values.
