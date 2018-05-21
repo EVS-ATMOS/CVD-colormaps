@@ -1,0 +1,29 @@
+#execute
+#export COIN_INSTALL_DIR=/Users/USERNAME/CONDA_DIR/envs/cvd-env
+#eg export COIN_INSTALL_DIR=/Users/scollis/anaconda3/envs/cvd-env
+#NOTE: Needs gfortran_osx-64 in the base env so make sure you do conda install gfortran_osx-64
+name: cvd-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6
+  - gfortran_osx-64
+  - cython
+  - numpy
+  - scipy
+  - matplotlib
+  - jupyter
+  - xarray
+  - netcdf4
+  - nose
+  - basemap
+  - trmm_rsl
+  - wradlib
+  - cartopy
+  - coincbc=2.9.9
+  - pip:
+     - git+https://github.com/jjhelmus/CyLP.git@py3
+     - git+https://github.com/ARM-DOE/pyart
+     - git+https://github.com/CSU-Radarmet/CSU_RadarTools.git
+     - git+https://github.com/matplotlib/viscm
