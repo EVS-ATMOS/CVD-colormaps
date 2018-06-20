@@ -1,6 +1,7 @@
 """ Contains dictionaries of the colormaps and their values. """
 
 import numpy as np
+import os
 
 # Creating a dictionary containing the LangRainbow12 colormap values.
 LangRainbow12_data = {
@@ -72,6 +73,9 @@ def yuv_rainbow_24(nc):
     return cmap_dict
 
 
+data_dir = os.path.split(__file__)[0]
+bal_rgb_vals = np.genfromtxt(os.path.join(data_dir, 'balance-rgb.txt'))
+
 blue_to_red = {'red':  ((0.0, 0.0, 0.0),
                    (0.25, 0.0, 0.0),
                    (0.5, 0.8, 1.0),
@@ -96,4 +100,5 @@ blue_to_red = {'red':  ((0.0, 0.0, 0.0),
 datad = {
         'HomeyerRainbow': yuv_rainbow_24(15),
         'LangRainbow12': LangRainbow12_data,
-        'Blue_to_red' : blue_to_red}
+        'Blue_to_red' : blue_to_red,
+        'balance' : bal_rgb_vals}
